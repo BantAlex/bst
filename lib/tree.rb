@@ -8,7 +8,10 @@ class Tree
 
  def build_tree(array)
    sorted_arr = array.sort.uniq
-   p sorted_arr
+   node = Node.new(sorted_arr)
+
+   root_index = (node.left + node.right) / 2
+   root_node = sorted_arr[root_index]
  end
 
 end
