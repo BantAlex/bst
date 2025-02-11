@@ -1,24 +1,20 @@
-require_relative 'node'
-
 class Tree
-  attr_reader :left, :right, :root_node
+  attr_accessor :root
 
- def initialize(array)
-    @root = build_tree(array)
- end
+  def initialize(arr)
+    @root = build_tree(arr,left,right)
+  end
 
- def build_tree(array, left = nil , right = nil)
-   sorted_arr = array.sort.uniq
-   node = Node.new(sorted_arr)
-   return if node.left > node.right
-   p sorted_arr
+  def build_tree(arr,left,right)
 
-  #  root_index = (node.left + node.right) / 2 #*This is just array.length / 2...
-   root_index = sorted_arr.length / 2
-   @root_node = sorted_arr[root_index]
+  end
 
-   @left = sorted_arr[0...root_index]
-   @right = sorted_arr[root_index + 1..sorted_arr.length - 1] #!I'm afraid to test this@
- end
+  def insert
+
+  end
+
+  def delete
+
+  end
 
 end

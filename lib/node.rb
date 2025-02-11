@@ -1,11 +1,11 @@
 class Node
-  attr_reader :data, :left, :right
+  attr_accessor
 
   def initialize(data)
     @data = data
-    @left = 0
-    @right = data.length - 1
-    #?Comparable module-compare nodes using their data attribute ?
+    @left = nil
+    @right = nil
+    #?Comparable attr
   end
 
 end
