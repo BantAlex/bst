@@ -26,11 +26,24 @@ class Tree
     pretty_print(node.left, "#{prefix}#{is_left ? '    ' : '│   '}", true) if node.left
   end
 
-  def insert
+  def insert(value)
+    return "Wrong input!" if value.class != Integer
+    current_node = @root
+    new_node = Node.new(value)
+
+    until !current_node.left && !current_node.right
+      current_node = current_node.left if value < current_node.data
+      current_node = current_node.right if value > current_node.data
+    end
+
+    p "This value already exists" if current_node.data == value
+
+    current_node.left = new_node if value < current_node.data
+    current_node.right = new_node if value > current_node.data
 
   end
 
-  def delete
+  def delete(value)
 
   end
 
