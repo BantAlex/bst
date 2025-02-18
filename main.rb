@@ -8,11 +8,17 @@ tree.insert(-9)
 p tree.pretty_print
 tree.insert(5)
 p tree.pretty_print
-tree.insert(100) #it deletes the right of 45
+tree.insert(100)
 p tree.pretty_print
 tree.insert(101)
 p tree.pretty_print
 tree.insert(26)
 p tree.pretty_print
 tree.insert(-102)
+p tree.pretty_print
+tree.delete(6)
+p tree.pretty_print
+tree.delete(-102)
+p tree.pretty_print
+tree.delete(101)
 p tree.pretty_print

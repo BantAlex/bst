@@ -19,35 +19,28 @@ class Tree
       return root_node
   end
 
-  def pretty_print(node = @root, prefix = '', is_left = true)
-    pretty_print(node.right, "#{prefix}#{is_left ? '│   ' : '    '}", false) if node.right
-    puts "#{prefix}#{is_left ? '└── ' : '┌── '}#{node.data}"
-    pretty_print(node.left, "#{prefix}#{is_left ? '    ' : '│   '}", true) if node.left
-  end
-
   def insert(node = @root,value)
     return "Wrong input!" if value.class != Integer
 
    if value == node.data
-    p "This node already exists"
-    return node
-   end
+    p "#{value} exists!"
+    return node #this probably won't work with #find
 
-   if value > node.data
-    if !node.right #?there's probably a better way to deal wit that instead of nesting if statements
+   elsif value > node.data
+    if !node.right #?there's probably a better way to deal with that instead of nesting if statements
       node.right = Node.new(value)
     else
       node.right = insert(node.right,value)
     end
+
+   else
+    if !node.left #?there's probably a better way to deal with that instead of nesting if statements
+      node.left = Node.new(value)
+    else
+      node.left = insert(node.left,value)
+    end
    end
 
-   if value < node.data
-      if !node.left #?there's probably a better way to deal wit that instead of nesting if statements
-        node.left = Node.new(value)
-      else
-        node.left = insert(node.left,value)
-      end
-   end
    return node
   end
 
@@ -67,9 +60,31 @@ class Tree
   #   current_node.right = new_node if value > current_node.data
 
   # end
+  #
+  def get_successor(current) #It works when the right child is not empty(thats what we want for #delete)
+    current = current.right
+    while current && current.left
+      current = current.left
+    end
+    return current
+  end
 
-  def delete(value)
-
+  def delete(node = @root,value)
+    return "Wrong input!" if value.class != Integer
+    #we should maybe use #find here to put out a message if the value does not exist in the tree
+    return node if !node
+    if node.data > value
+      node.left = delete(node.left,value)
+    elsif node.data < value
+      node.right = delete(node.right,value)
+    else #if node matches the given key-thats what we want
+      return node.right if !node.left
+      return node.left if !node.right
+      successor = get_successor(node)
+      node.data = successor.data
+      node.right = delete(node.right,node.data)
+    end
+    return node
   end
 
   def find(value)
@@ -106,6 +121,12 @@ class Tree
 
   def rebalance
 
+  end
+
+  def pretty_print(node = @root, prefix = '', is_left = true)
+    pretty_print(node.right, "#{prefix}#{is_left ? '│   ' : '    '}", false) if node.right
+    puts "#{prefix}#{is_left ? '└── ' : '┌── '}#{node.data}"
+    pretty_print(node.left, "#{prefix}#{is_left ? '    ' : '│   '}", true) if node.left
   end
 
 end
