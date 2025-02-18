@@ -71,6 +71,7 @@ class Tree
 
   def delete(node = @root,value)
     return "Wrong input!" if value.class != Integer
+    return "#{value} is not found in the tree" if !find(value)
     #we should maybe use #find here to put out a message if the value does not exist in the tree
     return node if !node
     if node.data > value
@@ -87,8 +88,20 @@ class Tree
     return node
   end
 
-  def find(value)
+  def find(node = @root, value)
     #?Maybe while making insert, make it return the node if it already exists and use it here
+   if !node
+     p "#{value} is not found in the tree"
+     return false
+   end
+    if value > node.data
+      node = find(node.right,value)
+    elsif value < node.data
+      node = find(node.left,value)
+    else
+      p node
+     return node
+    end
   end
 
   def level_order
