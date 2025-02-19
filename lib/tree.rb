@@ -11,10 +11,12 @@ class Tree
   def build_tree(arr,left,right)
       return nil if left > right
       root_index = (left + right)/2
-      root_node = Node.new(arr[root_index]) #*This should be a local variable! Otherwise it will update itself we're
-      #!going to have only one output
+      root_node = Node.new(arr[root_index]) #*This should be a local variable! Otherwise it will update itself and we're
+      #*going to have only one output
+
       root_node.left = build_tree(arr,left,root_index - 1) #*We use the whole arr because the array is sorted.
       #*We don't need to split it in half every recur. Now we take the last index of the left array instead of whole.
+
       root_node.right = build_tree(arr,root_index + 1,right)
       return root_node
   end
@@ -104,8 +106,40 @@ class Tree
     end
   end
 
-  def level_order
+  def level_order_it
+    return "Tree is empty" if !@root
 
+    queue = [@root]
+    values = []
+
+    until queue.empty? #*Loop until the queue is empty
+      #*So that means, that the loop will stop when all the available nodes are visited
+      current = queue.shift #*Dequeue the first element and make it the current node
+      #*This puts the first element of the queue array into the current var AND removes it from the array
+
+      yield current.data if block_given?
+      values << current.data
+
+      queue.push(current.left) if current.left #*Enque the children of current
+      queue.push(current.right) if current.right #*Enque the children of current
+    end
+    values unless block_given?
+  end
+
+  def level_order_rec(queue = [@root], values = [])
+    # return "Tree is empty" if !@root
+    # return if queue.empty?
+
+    # current = queue.shift
+
+    # yield current.data if block_given?
+    # values << current.data
+
+    # queue.push(current.left) if current.left #*Enque the children of current
+    # queue.push(current.right) if current.right #*Enque the children of current
+
+    # level_order_rec(queue,values)
+    # values unless block_given?
   end
 
   def inorder
@@ -133,7 +167,7 @@ class Tree
   end
 
   def rebalance
-
+    do_smth if !balanced?
   end
 
   def pretty_print(node = @root, prefix = '', is_left = true)
