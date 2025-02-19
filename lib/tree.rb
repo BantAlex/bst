@@ -127,19 +127,18 @@ class Tree
   end
 
   def level_order_rec(queue = [@root], values = [])
-    # return "Tree is empty" if !@root
-    # return if queue.empty?
+    return "Tree is empty" if !@root
+    return values if queue.empty?
 
-    # current = queue.shift
+    current = queue.shift
 
-    # yield current.data if block_given?
-    # values << current.data
+    yield current.data if block_given?
+    values << current.data
 
-    # queue.push(current.left) if current.left #*Enque the children of current
-    # queue.push(current.right) if current.right #*Enque the children of current
+    queue.push(current.left) if current.left
+    queue.push(current.right) if current.right
 
-    # level_order_rec(queue,values)
-    # values unless block_given?
+    level_order_rec(queue,values)
   end
 
   def inorder

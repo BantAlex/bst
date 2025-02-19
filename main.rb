@@ -26,3 +26,4 @@ p tree.pretty_print
 # tree.find(3)
 # tree.find(4)
 p tree.level_order_it
+p tree.level_order_rec
