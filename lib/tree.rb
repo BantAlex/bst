@@ -46,23 +46,6 @@ class Tree
    return node
   end
 
-  # def insert_non_rec(value) #not working yet
-  #   return "Wrong input!" if value.class != Integer
-  #   current_node = @root
-  #   new_node = Node.new(value)
-
-  #   until !current_node.left && !current_node.right
-  #     current_node = current_node.left if value < current_node.data
-  #     current_node = current_node.right if value > current_node.data
-  #   end
-
-  #   p "This value already exists" if current_node.data == value
-
-  #   current_node.left = new_node if value < current_node.data
-  #   current_node.right = new_node if value > current_node.data
-
-  # end
-  #
   def get_successor(current) #It works when the right child is not empty(thats what we want for #delete)
     current = current.right
     while current && current.left
@@ -189,11 +172,19 @@ class Tree
 
   end
 
-  def height
+  def height(node = @root,current_height = 0,values = [])
+    return "Tree is empty" if !@root
 
+    if node
+      current_height += 1
+      values << current_height #Add all the heights to the array
+      height(node.left,current_height,values)
+      height(node.right,current_height,values)
+      return "The height of the tree is #{values.max}" #Output the max height
+    end
   end
 
-  def depth
+  def depth(node = @root)
 
   end
 
