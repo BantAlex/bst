@@ -141,19 +141,41 @@ class Tree
     level_order_rec(queue,values)
   end
 
-  def inorder
+  def inorder(node = @root, values = []) #left subtree - root - right subtree
+    return "Tree is empty" if !@root
+
+    if node
+      inorder(node.left,values) #Go left if left
+
+      yield node.data if block_given? #Return data if no left
+      values << node.data #Return data if no left
+
+      inorder(node.right,values) #Go right if right
+
+      return values
+    end
 
   end
 
-  def preorder
+  def preorder #root - left subtree - right subtree
+    return "Tree is empty" if !@root
+
+    yield current.data if block_given?
+    values << current.data
+
 
   end
 
-  def postorder
+  def postorder #left subtree - right subtree - root
+    return "Tree is empty" if !@root
+
+    yield current.data if block_given?
+    values << current.data
+
 
   end
 
-  def hight
+  def height
 
   end
 
