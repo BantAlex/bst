@@ -28,3 +28,5 @@ p tree.pretty_print
 # p tree.level_order_it
 # p tree.level_order_rec
 # p tree.inorder
+p tree.preorder
+p tree.postorder

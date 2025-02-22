@@ -157,21 +157,35 @@ class Tree
 
   end
 
-  def preorder #root - left subtree - right subtree
+  def preorder(node = @root, values = []) #root - left subtree - right subtree
     return "Tree is empty" if !@root
 
-    yield current.data if block_given?
-    values << current.data
+    if node
+      yield node.data if block_given? #Return data if no left
+      values << node.data #Return data if no left
 
+      preorder(node.left,values) #Go left if left
+
+      preorder(node.right,values) #Go right if right
+
+      return values
+    end
 
   end
 
-  def postorder #left subtree - right subtree - root
+  def postorder(node = @root, values = []) #left subtree - right subtree - root
     return "Tree is empty" if !@root
 
-    yield current.data if block_given?
-    values << current.data
+    if node
+      postorder(node.left,values) #Go left if left
 
+      postorder(node.right,values) #Go right if right
+
+      yield node.data if block_given? #Return data if no left
+      values << node.data #Return data if no left
+
+      return values
+    end
 
   end
 
