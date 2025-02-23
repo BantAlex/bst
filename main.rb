@@ -33,3 +33,9 @@ p tree.postorder
 p tree.height(7)
 p tree.height(100)
 p tree.height(1002)
+print "
+"
+p tree.depth(9)
+p tree.depth(7)
+p tree.depth(1002)
+p tree.depth(99)

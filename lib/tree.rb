@@ -174,21 +174,29 @@ class Tree
 
   def height(node = @root, height = -1, found=false, value)
     return "Tree is empty" if !@root
+
     if node
       found = true if node.data == value
       height += 1 if found
       if !node.left && !node.right
         return "#{value} is not part of the current tree." if height == -1
-        return height
+        return "#{value}'s height is #{height}"
       end
       height(node.left,height,found,value)
       height(node.right,height,found,value)
     end
   end
 
-  def depth(value)
+  def depth(node = @root,depth = -1,value)
     return "Tree is empty" if !@root
 
+    if node
+      depth += 1
+      return "#{value}'s depth is #{depth}" if node.data == value
+      depth(node.left,depth,value)
+      depth(node.right,depth,value)
+      # return "#{value} is not part of the current tree." if smth #*We need a way to prevent wrong inputs
+    end
   end
 
   def balanced?
