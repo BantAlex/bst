@@ -30,4 +30,6 @@ p tree.pretty_print
 # p tree.inorder
 p tree.preorder
 p tree.postorder
-p tree.height
+p tree.height(7)
+p tree.height(100)
+p tree.height(1002)

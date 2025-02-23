@@ -172,19 +172,22 @@ class Tree
 
   end
 
-  def height(node = @root,current_height = 0,values = [])
+  def height(node = @root, height = -1, found=false, value)
     return "Tree is empty" if !@root
-
     if node
-      current_height += 1
-      values << current_height #Add all the heights to the array
-      height(node.left,current_height,values)
-      height(node.right,current_height,values)
-      return "The height of the tree is #{values.max}" #Output the max height
+      found = true if node.data == value
+      height += 1 if found
+      if !node.left && !node.right
+        return "#{value} is not part of the current tree." if height == -1
+        return height
+      end
+      height(node.left,height,found,value)
+      height(node.right,height,found,value)
     end
   end
 
-  def depth(node = @root)
+  def depth(value)
+    return "Tree is empty" if !@root
 
   end
 
