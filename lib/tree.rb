@@ -165,20 +165,22 @@ class Tree
 
   end
 
-  def tree_height(node = @root,current_height = 0,values = [])
-    return "Tree is empty" if !@root
-
-    if node
-      current_height += 1
-      values << current_height #Add all the heights to the array
-      tree_height(node.left,current_height,values)
-      tree_height(node.right,current_height,values)
-      return values.max #Output the max height
-    end
+  def tree_height(node = @root,current_height = -1,values = [])
+    return if  !node
+    current_height += 1
+    values << current_height #Add all the heights to the array
+    tree_height(node.left,current_height,values)
+    tree_height(node.right,current_height,values)
+    return values.max #Output the max height
   end
 
-  def height(value)
+  def height(node)
+    return -1 if node.nil?
 
+    left = height(node.left)
+    right = height(node.right)
+
+    [left,right].max + 1
   end
 
   def depth(node = @root,depth = -1,value) #!It thinks left tree does not exist

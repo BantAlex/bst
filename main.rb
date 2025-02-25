@@ -31,7 +31,7 @@ p tree.level_order_it
 p tree.preorder
 p tree.postorder
 p tree.tree_height
-# p tree.height(7)
+p tree.height(tree.root)
 # p tree.height(1)
 # p tree.height(-9)
 # p tree.height(100)
