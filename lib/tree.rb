@@ -84,13 +84,12 @@ class Tree
     elsif value < node.data
       node = find(node.left,value)
     else
-      p node
+      # p node #!It messes up the height method
      return node
     end
   end
 
   def level_order_it
-    return "Tree is empty" if !@root
 
     queue = [@root]
     values = []
@@ -110,7 +109,6 @@ class Tree
   end
 
   def level_order_rec(queue = [@root], values = [])
-    return "Tree is empty" if !@root
     return values if queue.empty?
 
     current = queue.shift
@@ -125,7 +123,6 @@ class Tree
   end
 
   def inorder(node = @root, values = []) #left subtree - root - right subtree
-    return "Tree is empty" if !@root
 
     if node
       inorder(node.left,values) #Go left if left
@@ -141,8 +138,6 @@ class Tree
   end
 
   def preorder(node = @root, values = []) #root - left subtree - right subtree
-    return "Tree is empty" if !@root
-
     if node
       yield node.data if block_given? #Return data if no left
       values << node.data #Return data if no left
@@ -157,8 +152,6 @@ class Tree
   end
 
   def postorder(node = @root, values = []) #left subtree - right subtree - root
-    return "Tree is empty" if !@root
-
     if node
       postorder(node.left,values) #Go left if left
 
@@ -172,35 +165,34 @@ class Tree
 
   end
 
-  def height(node = @root, height = -1, found=false, value)
+  def tree_height(node = @root,current_height = 0,values = [])
     return "Tree is empty" if !@root
 
     if node
-      found = true if node.data == value
-      height += 1 if found
-      if !node.left && !node.right
-        return "#{value} is not part of the current tree." if height == -1
-        return "#{value}'s height is #{height}"
-      end
-      height(node.left,height,found,value)
-      height(node.right,height,found,value)
+      current_height += 1
+      values << current_height #Add all the heights to the array
+      tree_height(node.left,current_height,values)
+      tree_height(node.right,current_height,values)
+      return values.max #Output the max height
     end
   end
 
-  def depth(node = @root,depth = -1,value)
-    return "Tree is empty" if !@root
+  def height(value)
+
+  end
+
+  def depth(node = @root,depth = -1,value) #!It thinks left tree does not exist
+    return if !find(value)
 
     if node
       depth += 1
       return "#{value}'s depth is #{depth}" if node.data == value
       depth(node.left,depth,value)
       depth(node.right,depth,value)
-      # return "#{value} is not part of the current tree." if smth #*We need a way to prevent wrong inputs
     end
   end
 
   def balanced?
-
   end
 
   def rebalance

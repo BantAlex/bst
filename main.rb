@@ -25,17 +25,18 @@ p tree.pretty_print
 # tree.find(99)
 # tree.find(3)
 # tree.find(4)
-# p tree.level_order_it
+p tree.level_order_it
 # p tree.level_order_rec
 # p tree.inorder
 p tree.preorder
 p tree.postorder
-p tree.height(7)
-p tree.height(100)
-p tree.height(1002)
-print "
-"
-p tree.depth(9)
-p tree.depth(7)
-p tree.depth(1002)
-p tree.depth(99)
+p tree.tree_height
+# p tree.height(7)
+# p tree.height(1)
+# p tree.height(-9)
+# p tree.height(100)
+# p tree.height(1002)
+# p tree.depth(9)
+# p tree.depth(7)
+# p tree.depth(1002)
+# p tree.depth(3)
